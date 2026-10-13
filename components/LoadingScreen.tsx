@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true)
@@ -45,19 +46,8 @@ export function LoadingScreen() {
               className="flex flex-col items-center"
             >
               <div className="relative mb-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-glow-lg">
-                  <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-                    <path
-                      d="M8 22L18 12L22 16L18 20L26 28L22 32L12 22L8 22Z"
-                      fill="white"
-                      fillOpacity="0.9"
-                    />
-                    <path
-                      d="M36 22L26 32L22 28L26 24L18 16L22 12L32 22L36 22Z"
-                      fill="white"
-                      fillOpacity="0.6"
-                    />
-                  </svg>
+                <div className="w-20 h-20 flex items-center justify-center">
+                  <Image src="/logo.jpeg" alt="Bigger Mind" width={80} height={80} className="object-contain" />
                 </div>
                 <motion.div
                   animate={{ scale: [1, 1.3, 1] }}
