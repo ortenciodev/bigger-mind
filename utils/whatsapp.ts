@@ -4,7 +4,7 @@ export interface WhatsAppConfig {
 }
 
 export function getWhatsAppLink(config?: WhatsAppConfig): string {
-  const phone = config?.phone || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511999999999'
+  const phone = config?.phone || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5541996128712'
   const message = config?.message || process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || 'Olá! Vim pelo site da BIGGER MIND e gostaria de saber mais sobre os serviços de desenvolvimento.'
   const encodedMessage = encodeURIComponent(message)
   return `https://wa.me/${phone}?text=${encodedMessage}`
