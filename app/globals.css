@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00D4FF;
+  --secondary: #7C3AED;
+  --dark-900: #020818;
+  --dark-800: #050B17;
+  --dark-700: #0A0F1E;
+  --dark-600: #0F1629;
+  --dark-500: #151E38;
+  --dark-400: #1E2D4A;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #1E2D4A #020818;
+}
+
+body {
+  background-color: var(--dark-900);
+  color: #F0F4FF;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--dark-400);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2A3F66;
+}
+
+::selection {
+  background: rgba(0, 212, 255, 0.2);
+  color: #fff;
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .text-gradient-animated {
+    background: linear-gradient(135deg, #00D4FF, #7C3AED, #00D4FF);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-dark {
+    background: rgba(15, 22, 41, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.15);
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer components {
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-glow:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-shine::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      rgba(0, 212, 255, 0.05) 60deg,
+      transparent 120deg
+    );
+    animation: spin-slow 8s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card-shine:hover::before {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); }
+  100% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.6), 0 0 100px rgba(0, 212, 255, 0.2); }
+}
+
+@keyframes scan {
+  0% { top: -5%; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 105%; opacity: 0; }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.perspective-container {
+  perspective: 1200px;
+  perspective-origin: center;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
